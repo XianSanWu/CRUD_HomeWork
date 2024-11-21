@@ -18,7 +18,7 @@ namespace CRUD_HomeWork.Service
 
         public async Task<List<Employee>> GetAllEmployeesAsync()
         {
-            return await _repository.GetAll<Employee>().ToListAsync();
+            return await _repository.GetAllAsync<Employee>();
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)

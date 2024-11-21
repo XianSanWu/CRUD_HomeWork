@@ -1,6 +1,7 @@
 ﻿using CRUD_HomeWork.Data;
 using CRUD_HomeWork.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,10 +32,11 @@ namespace CRUD_HomeWork.Repository
             _dbcontext.Entry<T>(entity).State = EntityState.Deleted;
         }
 
-        public IQueryable<T> GetAll<T>() where T : class
+        public async Task<List<T>> GetAllAsync<T>() where T : class
         {
-            return _dbcontext.Set<T>();
+            return await _dbcontext.Set<T>().ToListAsync();
         }
+
 
         public void Save()
         {

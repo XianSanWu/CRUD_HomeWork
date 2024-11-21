@@ -1,4 +1,5 @@
 ﻿using CRUD_HomeWork.Data;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace CRUD_HomeWork.Repository.Interface
         public void Create<T>(T entity) where T : class;
         public void Delete<T>(T entity) where T : class;
         public void Update<T>(T entity) where T : class;
-        public IQueryable<T> GetAll<T>() where T : class;
+        Task<List<T>> GetAllAsync<T>() where T : class;
 
         public void Save();
 
