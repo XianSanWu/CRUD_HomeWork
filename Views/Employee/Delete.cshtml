@@ -1,0 +1,25 @@
+﻿@model CRUD_HomeWork.Models.DBEntity.Employee
+
+@{
+    ViewData["Title"] = "刪除員工";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h3>您確定要刪除以下員工嗎？</h3>
+    <dl class="dl-horizontal">
+        <dt>員工名稱</dt>
+        <dd>@Model.FirstName @Model.LastName</dd>
+        <dt>職稱</dt>
+        <dd>@Model.Title</dd>
+        <dt>聘用日期</dt>
+        <dd>@Model.HireDate?.ToShortDateString()</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="EmployeeId" />
+    <button type="submit" class="btn btn-danger">確定刪除</button>
+    <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary">返回列表</a>
+</form>

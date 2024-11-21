@@ -1,0 +1,17 @@
+﻿@model CRUD_HomeWork.Models.DBEntity.Employee
+
+@{
+    ViewData["Title"] = "員工詳細資料";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h3>@Model.FirstName @Model.LastName</h3>
+    <p>職稱: @Model.Title</p>
+    <p>聘用日期: @Model.HireDate?.ToShortDateString()</p>
+</div>
+
+<p>
+    <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary">返回列表</a>
+</p>

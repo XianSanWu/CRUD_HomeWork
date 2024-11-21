@@ -1,6 +1,12 @@
+using CRUD_HomeWork.Data;
+using CRUD_HomeWork.Repository;
+using CRUD_HomeWork.Repository.Interface;
+using CRUD_HomeWork.Service;
+using CRUD_HomeWork.Service.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +29,19 @@ namespace CRUD_HomeWork
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("NorthwindConnection");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("未配置連接字串“Northwind”");
+            }
+
+            services.AddDbContext<NorthwindContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            services.AddTransient<IDbRepository, DbRepository>();
+
+            services.AddTransient<IEmployeeService, EmployeeService>();
+
             services.AddControllersWithViews();
         }
 
@@ -50,7 +69,7 @@ namespace CRUD_HomeWork
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Employee}/{action=Index}/{id?}");
             });
         }
     }

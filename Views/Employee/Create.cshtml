@@ -1,0 +1,30 @@
+﻿@model CRUD_HomeWork.Models.DBEntity.Employee
+
+@{
+    ViewData["Title"] = "新增員工";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="FirstName">名字</label>
+        <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" required />
+    </div>
+    <div class="form-group">
+        <label for="LastName">姓氏</label>
+        <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName" required />
+    </div>
+    <div class="form-group">
+        <label for="Title">職稱</label>
+        <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" />
+    </div>
+    <div class="form-group">
+        <label for="HireDate">聘用日期</label>
+        <input type="date" class="form-control" id="HireDate" name="HireDate" value="@Model.HireDate?.ToString("yyyy-MM-dd")" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">提交</button>
+    <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary">返回列表</a>
+
+</form>
